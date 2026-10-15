@@ -1,0 +1,10 @@
+﻿//Microsoft Visual C++ で生成されたリソース スクリプトです。
+//
+#include "Resource.h"
+#include <windows.h>
+
+LANGUAGE 17, 1
+
+// アプリケーション アイコンをすべてのシステム上で維持するために、最も小さい
+// ID 値のアイコンが最初に配置されます。
+IDI_BITWORK ICON "BitWork.ico"
