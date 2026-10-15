@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="BitWork/BitWork.vcxproj" Id="bfb6a83c-4bae-42c7-bbe9-9dcdf4ca6135" />
+  <Project Path="BitWorks/BitWorks.vcxproj" Id="bfb6a83c-4bae-42c7-bbe9-9dcdf4ca6135" />
 </Solution>

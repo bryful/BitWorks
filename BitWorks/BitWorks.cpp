@@ -1,4 +1,4 @@
-﻿// BitWork.cpp : アプリケーションのエントリ ポイントを定義します。
+﻿// BitWorks.cpp : アプリケーションのエントリ ポイントを定義します。
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include "Resource.h"
@@ -62,9 +62,9 @@ struct App
     {
         const auto* viewport = ImGui::GetMainViewport();
         ImGui::SetNextWindowPos(viewport->WorkPos); ImGui::SetNextWindowSize(viewport->WorkSize);
-        ImGui::Begin("BitWork", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoSavedSettings);
+        ImGui::Begin("BitWorks", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoSavedSettings);
         const float scale = ImGui::GetStyle().FontScaleDpi;
-        ImGui::TextColored(ImVec4(.30f,.85f,.75f,1), "BITWORK");
+        ImGui::TextColored(ImVec4(.30f,.85f,.75f,1), "BITWORKS");
         ImGui::SameLine();
         if (ImGui::Checkbox("TopMost", &topMost))
         {
@@ -163,7 +163,7 @@ int APIENTRY wWinMain(HINSTANCE instance, HINSTANCE, LPWSTR, int show)
 {
     ImGui_ImplWin32_EnableDpiAwareness();
     WNDCLASSEXW wc{ sizeof(WNDCLASSEXW) };
-    wc.lpfnWndProc = wndProc; wc.hInstance = instance; wc.lpszClassName = L"BitWorkWindow";
+    wc.lpfnWndProc = wndProc; wc.hInstance = instance; wc.lpszClassName = L"BitWorksWindow";
     wc.hCursor = LoadCursorW(nullptr, IDC_ARROW);
     const UINT iconDpi = GetDpiForSystem();
     wc.hIcon = static_cast<HICON>(LoadImageW(instance, MAKEINTRESOURCEW(IDI_BITWORK), IMAGE_ICON,
@@ -174,7 +174,7 @@ int APIENTRY wWinMain(HINSTANCE instance, HINSTANCE, LPWSTR, int show)
     const UINT initialDpi = GetDpiForSystem();
     RECT initial{0, 0, MulDiv(360, initialDpi, 96), MulDiv(280, initialDpi, 96)};
     AdjustWindowRectExForDpi(&initial, WS_OVERLAPPEDWINDOW, FALSE, 0, initialDpi);
-    const HWND window = CreateWindowExW(0, wc.lpszClassName, L"BitWork", WS_OVERLAPPEDWINDOW,
+    const HWND window = CreateWindowExW(0, wc.lpszClassName, L"BitWorks", WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, initial.right - initial.left, initial.bottom - initial.top, nullptr, nullptr, instance, nullptr);
     if (!window) { UnregisterClassW(wc.lpszClassName, instance); return 1; }
     Graphics gfx;
@@ -189,7 +189,7 @@ int APIENTRY wWinMain(HINSTANCE instance, HINSTANCE, LPWSTR, int show)
     };
     if ((FAILED(create(D3D_DRIVER_TYPE_HARDWARE)) && FAILED(create(D3D_DRIVER_TYPE_WARP))) || !gfx.makeTarget())
     {
-        MessageBoxW(window, L"Direct3D 11 の初期化に失敗しました。", L"BitWork", MB_OK | MB_ICONERROR);
+        MessageBoxW(window, L"Direct3D 11 の初期化に失敗しました。", L"BitWorks", MB_OK | MB_ICONERROR);
         DestroyWindow(window); UnregisterClassW(wc.lpszClassName, instance); return 1;
     }
     IMGUI_CHECKVERSION(); ImGui::CreateContext();
@@ -208,7 +208,7 @@ int APIENTRY wWinMain(HINSTANCE instance, HINSTANCE, LPWSTR, int show)
     const bool rendererReady = platformReady && ImGui_ImplDX11_Init(gfx.device.Get(), gfx.context.Get());
     if (!rendererReady)
     {
-        MessageBoxW(window, L"UI の初期化に失敗しました。", L"BitWork", MB_OK | MB_ICONERROR);
+        MessageBoxW(window, L"UI の初期化に失敗しました。", L"BitWorks", MB_OK | MB_ICONERROR);
         if (platformReady) ImGui_ImplWin32_Shutdown();
         ImGui::DestroyContext(); DestroyWindow(window); UnregisterClassW(wc.lpszClassName, instance); return 1;
     }
@@ -237,7 +237,7 @@ int APIENTRY wWinMain(HINSTANCE instance, HINSTANCE, LPWSTR, int show)
         ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
         if (FAILED(gfx.swap->Present(1, 0))) { exitCode = 1; break; }
     }
-    if (exitCode) MessageBoxW(window, L"描画デバイスの処理に失敗しました。再起動してください。", L"BitWork", MB_OK | MB_ICONERROR);
+    if (exitCode) MessageBoxW(window, L"描画デバイスの処理に失敗しました。再起動してください。", L"BitWorks", MB_OK | MB_ICONERROR);
     ImGui_ImplDX11_Shutdown(); ImGui_ImplWin32_Shutdown(); ImGui::DestroyContext();
     if (IsWindow(window)) DestroyWindow(window);
     UnregisterClassW(wc.lpszClassName, instance);

@@ -7,4 +7,4 @@ LANGUAGE 17, 1
 
 // アプリケーション アイコンをすべてのシステム上で維持するために、最も小さい
 // ID 値のアイコンが最初に配置されます。
-IDI_BITWORK ICON "BitWork.ico"
+IDI_BITWORK ICON "BitWorks.ico"
